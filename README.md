@@ -1,4 +1,5 @@
 <img src=https://dreamvu.com/wp-content/uploads/2020/07/logo_footer_trans-1-1.png alt="DreamVU">
+
 # ros2_dreamvu_pal_description
 
 This unoffical package creates a ros2 node which publishes the shape and coordinate frames of [the DreamVU PAL camera](https://dreamvu.com/pal-usb/), based on a description described in a xacro file.
@@ -13,11 +14,13 @@ This package allows you use the visualize the PAL camera with rviz2 of ROS2. It 
      alt="DreamVu pal description in Rviz2"
      style="display:block; margin-right: 10px; ext-align:center; " width="800"/>
 
- ## Known issues
+ ### Known issues
 
 * The published messages require a chain of coordinate transformations from the pal_camera_center to the robot's base_link to the map to allow rviz2 to visualize the description (and the images and point cloud).
 * The images should be published relative to optical frame, with the z-axis in the horizontal plane (instead of the current z-axis pointing upwards). The naming of the coordinates frames of this node and the ones in <a href=https://github.com/physar/ros2_pal_camera_node>ros2_pal_camera_node</a> should be consistent.
 * The software is currently tested on one computer, more tests are on the way.
+
+## Installation
                                              
 ### Prerequisites
 
@@ -48,7 +51,7 @@ $ sudo apt install ros-foxy-robot-state-publisher
 $ sudo apt install python3-rosdep2
 $ sudo apt install python3-colcon-common-extensions
 ```
-## Build the package
+### Build the package
 
 To install the **ros2 pal_camera_description**, clone the package from github and build it:
 
@@ -68,7 +71,10 @@ If you want to install this package permanently ot your shell,
 $ echo source $(pwd)/install/local_setup.bash >> ~/.bashrc
 $ source ~/.bashrc
 ```
-# Starting the PAL camera description
+
+## Running the ros2 node
+
+### Starting the PAL camera description
 
 To start the **ros2 pal_camera_description**, open a terminal and start it with the command.
 
@@ -78,7 +84,7 @@ $ source $~/ros2_ws/install/local_setup.bash
 $ ros2 launch dreamvu_pal_camera_description pal_camera_description.launch.py cam_pos_z:=0.06
 ```
 
-# Inspect the published description
+### Inspect the published description
 
 ```bash
 $ ros2 topic list | grep dreamvu
@@ -99,7 +105,7 @@ ros2 run rviz2 rviz2
 
 Add in this view a TF (and activate the frame pal_camera_center) and a RobotModel (for the topic ```/dreamvu/pal/robot_description```).
 
-# camera description and rviz2 combined
+### camera description and rviz2 combined
 
 This package also contains a launch script with launches both the description and rviz2, with the views of rviz2 are already provided.
 
@@ -109,7 +115,7 @@ $ source $~/ros2_ws/install/local_setup.bash
 $ ros2 launch dreamvu_pal_camera_description display+pal_camera.launch.py
 ```
 
- Troubleshooting
+## Troubleshooting
 
 * If your PAL camera is description is not visible in rviz2, open the RobotModel and look which property is marked red to indicate an error.
 
@@ -121,15 +127,4 @@ $ source $~/ros2_ws/install/local_setup.bash
 $ ros2 launch dreamvu_pal_camera_description transfer_base_link.launch.py
 ```
 
-* rviz2 is dropping messages. This means that sensor data (images or point cloud) are published with in the header of the message a coordinate system which is not initiated (yet). Probably the chain is broken for the coordinate transformation from the map to the base_link. The camera images are published from the coordinate system 'pal_camera_center'. See for the solution the state_transform_publisher above.
-
-
-
-
-
-
-
-                                             
-                                             
-
-                                           
+* rviz2 is dropping messages. This means that sensor data (images or point cloud) are published with in the header of the message a coordinate system which is not initiated (yet). Probably the chain is broken for the coordinate transformation from the map to the base_link. The camera images are published from the coordinate system 'pal_camera_center'. See for the solution the state_transform_publisher above.             
