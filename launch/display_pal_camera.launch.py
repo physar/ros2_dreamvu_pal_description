@@ -143,7 +143,7 @@ def generate_launch_description():
         package='rviz2',
         namespace=camera_name,
         executable='rviz2',
-        name=camera_name+'_rviz2',
+        name='dreamvu_pal_rviz2',
         output='screen',
         arguments=[["-d"], [rviz2_path]],
     )
