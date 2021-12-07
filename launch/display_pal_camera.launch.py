@@ -157,6 +157,7 @@ def generate_launch_description():
     ld.add_action(declare_camera_model_cmd)
     ld.add_action(declare_publish_urdf_cmd)
     ld.add_action(declare_xacro_path_cmd)
+    ld.add_action(declare_rviz2_path_cmd)
     ld.add_action(declare_base_frame_cmd)
     ld.add_action(declare_pos_x_cmd)
     ld.add_action(declare_pos_y_cmd)
