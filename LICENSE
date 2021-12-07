@@ -1,6 +1,10 @@
 MIT License
 
-Copyright (c) 2021 Arnoud Visser
+* Copyright (c) 2021 Arnoud Visser - creating a PAL-camera description for ROS2
+* Copyright (c) 2020 Stereolabs - substantial portions of this code was inspired by StereoLabs zed_display_rviz2 for ROS2
+* Copyright (c) 2021 DreamVU - DreamVU original ROS1 description was not publically released (only available under NDA), 
+                so this code was build from scratch and not based on their release (although it should be functional equivalent). 
+                Still, they should still get all credit for the design of the PAL-camera itself.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
