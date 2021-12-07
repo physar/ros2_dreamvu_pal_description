@@ -16,7 +16,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    package_dir = get_package_share_directory('ros2_dreamvu_pal_description')
+    package_dir = get_package_share_directory('dreamvu_pal_description')
 
     publish_urdf = LaunchConfiguration('publish_urdf')
 
