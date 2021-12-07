@@ -119,6 +119,10 @@ $ ros2 launch dreamvu_pal_camera_description display+pal_camera.launch.py
 
 * If your PAL camera is description is not visible in rviz2, open the RobotModel and look which property is marked red to indicate an error.
 
+<img src="https://github.com/physar/ros2_dreamvu_pal_description/blob/main/images/Troubleshoot.png"
+     alt="DreamVu pal description in Rviz2"
+     style="display:block; margin-right: 10px; ext-align:center; " width="800"/>
+
 * If the transforms indicate an error, start a static_transform_publisher from the map to the base_link by the command: 
 
 ```bash
