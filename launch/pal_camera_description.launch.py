@@ -16,7 +16,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    package_dir = get_package_share_directory('pal')
+    package_dir = get_package_share_directory('dreamvu_pal_camera_description')
 
     publish_urdf = LaunchConfiguration('publish_urdf')
     xacro_path = LaunchConfiguration('xacro_path')
