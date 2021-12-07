@@ -9,9 +9,9 @@ This package here is based on the Colcon build system, which allows to build the
   
 This package allows you use the visualize the PAL camera with rviz2 of ROS2. It will publish the ros2 topics '/dreamvu/pal/robot_description' and '/dreamvu/pal/joint_states', which correspond to a number of 'static_tf' messages. Note, that all the 'static_tf' are coordinate transformations relative to the camera_center, which is defined (configuarble thanks to ROS2 parameters) on a height of 6cm above the base_link. The base_link defines the coordinate system of a robot, which can moves around through the map. The coordinate frames inside the sensor are only defined when the transformation between the base_link and map are known. If the sensor is not mounted on a robot, a separate static_transform publisher for this base_link to map transformation is provided in the launch-directory.
 
-<img src=images/Rviz2.png"
+<img src="https://github.com/physar/ros2_dreamvu_pal_description/blob/main/images/Rviz2.png"
      alt="DreamVu pal description in Rviz2"
-     style="float: left; margin-right: 10px;" width=300/>
+     style="display:block; margin-right: 10px; ext-align:center; " width="800"/>
 
  ## Known issues
 
