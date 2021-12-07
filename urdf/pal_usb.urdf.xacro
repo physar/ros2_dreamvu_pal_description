@@ -46,7 +46,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </xacro:if>
 
     <!-- units are meters, so the pal-usb is 10cm height -->
-    <xacro:if value="${model == 'pal-usb'}">
+    <xacro:if value="${model == 'pal_usb'}">
         <xacro:property name="camera_top_height" value="0.008" />
         <xacro:property name="camera_bottom_height" value="0.027" />
         <xacro:property name="camera_center_height" value="0.06" />
