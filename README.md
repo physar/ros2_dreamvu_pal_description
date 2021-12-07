@@ -57,7 +57,7 @@ To install the **ros2 pal_camera_description**, clone the package from github an
 
 ```bash
 $ cd ~/ros2_ws/src/ #use your current ros2 workspace folder
-$ git clone https://github.com/physar/ros2_pal_camera_description.git
+$ git clone hhttps://github.com/physar/ros2_dreamvu_pal_description.git
 $ cd ~/ros2_ws/
 $ sudo apt-get update
 $ rosdep update
