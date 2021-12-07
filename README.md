@@ -121,7 +121,7 @@ $ source $~/ros2_ws/install/local_setup.bash
 $ ros2 launch dreamvu_pal_camera_description transfer_base_link.launch.py
 ```
 
-* rviz2 is dropping messages. This means that sensor data (images) are published with from a coordinate system which is not initiated (yet). Probably the chain is broken for the coordinate transformation from the map to the base_link. The camera images are published from the coordinate system 'pal_camera_center'. See for the solution the state_transform_publisher above.
+* rviz2 is dropping messages. This means that sensor data (images or point cloud) are published with in the header of the message a coordinate system which is not initiated (yet). Probably the chain is broken for the coordinate transformation from the map to the base_link. The camera images are published from the coordinate system 'pal_camera_center'. See for the solution the state_transform_publisher above.
 
 
 
