@@ -112,7 +112,7 @@ This package also contains a launch script with launches both the description an
 ```bash
 $ source /opt/ros/foxy/setup.bash
 $ source $~/ros2_ws/install/local_setup.bash
-$ ros2 launch dreamvu_pal_camera_description display+pal_camera.launch.py
+$ ros2 launch dreamvu_pal_camera_description display_pal_camera.launch.py
 ```
 
 ## Troubleshooting
