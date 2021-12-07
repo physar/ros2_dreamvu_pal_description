@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<!--
+Copyright (c) 2021, Arnoud Visser
+Copyright (c) 2021, DREAMVU.
+Copyright (c) 2021, STEREOLABS.
+
+All rights reserved.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<robot name="pal_usb" xmlns:xacro="http://ros.org/wiki/xacro">
+    <!-- Arguments -->
+
+    <xacro:arg name="camera_name"   default="/dreamvu/pal" />
+    <xacro:arg name="camera_model"  default="pal-usb" />
+    <xacro:arg name="base_frame"    default="base_link" />
+    <xacro:arg name="cam_pos_x"     default="0.0" />
+    <xacro:arg name="cam_pos_y"     default="0.0" />
+    <xacro:arg name="cam_pos_z"     default="0.0" />
+    <xacro:arg name="cam_roll"      default="0.0" />
+    <xacro:arg name="cam_pitch"     default="0.0" />
+    <xacro:arg name="cam_yaw"       default="0.0" />
+
+    <!-- Properties -->
+    <xacro:property name="M_PI"     value="3.1415926535897931" />
+    <xacro:property name="model"    value="$(arg camera_model)" />
+
+
+    <!-- pal-usb is only validated model -->
+    <xacro:if value="${model == 'pal'}">
+        <xacro:property name="camera_top_height" value="0.008" />
+        <xacro:property name="camera_bottom_height" value="0.027" />
+        <xacro:property name="camera_center_height" value="0.06" />
+        <xacro:property name="camera_height" value="0.10" />
+    </xacro:if>
+
+    <!-- units are meters, so the pal-usb is 10cm height -->
+    <xacro:if value="${model == 'pal-usb'}">
+        <xacro:property name="camera_top_height" value="0.008" />
+        <xacro:property name="camera_bottom_height" value="0.027" />
+        <xacro:property name="camera_center_height" value="0.06" />
+        <xacro:property name="camera_height" value="0.10" />
+    </xacro:if>
+
+   <!-- default option is to rename base_frame to base_link -->
+   <link name="$(arg base_frame)" />
+
+   <joint name="$(arg camera_name)_camera_center_joint" type="fixed">
+        <parent link="$(arg base_frame)"/>
+        <child link="$(arg camera_name)_camera_center"/>
+        <origin xyz="$(arg cam_pos_x) $(arg cam_pos_y) $(arg cam_pos_z)" rpy="$(arg cam_roll) $(arg cam_pitch) $(arg cam_yaw)" />
+    </joint>
+
+   <link name="$(arg camera_name)_camera_center" />
+
+   <joint name="$(arg camera_name)_center_to_mirror" type="fixed">
+	<parent link="$(arg camera_name)_camera_center"/>
+	<child link="$(arg camera_name)_camera_mirror"/>
+	<origin xyz="0.0 0.0 ${(camera_center_height-camera_height)/2.5}" rpy=" 0.0 0.0 0.0" /> 
+   </joint>
+
+   <link name="$(arg camera_name)_camera_mirror">
+     <origin xyz="0.0 0.0 0.0" rpy=" 0.0 0.0 0.0" /> 
+     <visual>
+       <geometry>
+         <sphere radius="0.0425"/>
+       </geometry>
+	 <material name="Light Grey">
+              <color rgba="${215/255} ${215/255} ${215/255} 0.8"/>
+      </material>
+     </visual>
+   </link>
+
+   <joint name="$(arg camera_name)_center_to_top" type="fixed">
+	<parent link="$(arg camera_name)_camera_center"/>
+	<child link="$(arg camera_name)_mounting_top"/>
+	<origin xyz="0.0 0.0 ${camera_height-camera_center_height-(camera_top_height)/2}" rpy=" 0.0 0.0 ${M_PI}" /> 
+   </joint>
+
+   <link name="$(arg camera_name)_mounting_top">
+     <visual>
+       <origin xyz="0.0 0.0 0.0" rpy=" 0.0 0.0 0.0" /> 
+       <geometry>
+         <cylinder length="${camera_top_height}" radius="0.0185"/>
+       </geometry>
+       <material name="Black">
+              <color rgba="${25/255} ${25/255} ${25/255} 1.0"/>
+       </material>
+     </visual>
+   </link>
+
+   <joint name="$(arg camera_name)_center_to_bottom" type="fixed">
+	<parent link="$(arg camera_name)_camera_center"/>
+	<child link="$(arg camera_name)_mounting_bottom"/>
+        <origin xyz="0.0 0.0 ${(camera_bottom_height)/2-camera_center_height}" rpy=" 0.0 0.0 0.0" /> 
+   </joint>
+
+   <link name="$(arg camera_name)_mounting_bottom">
+     <visual>
+       <origin xyz="0.0 0.0 0.0" rpy=" 0.0 0.0 0.0" /> 
+       <geometry>
+         <cylinder length="${camera_bottom_height}" radius="0.05"/>
+       </geometry>
+       <material name="Black">
+              <color rgba="${255/255} ${255/255} ${255/255} 0.7"/>
+       </material>
+     </visual>
+   </link>
+
+   <joint name="$(arg camera_name)_center_to_protection" type="fixed">
+	<parent link="$(arg camera_name)_camera_center"/>
+	<child link="$(arg camera_name)_mirror_protection"/>
+	<origin xyz="0.0 0.0 ${camera_bottom_height-camera_center_height}" rpy=" 0.0 0.0 0.0" /> 
+   </joint>
+
+   <link name="$(arg camera_name)_mirror_protection">
+     <visual>
+       <origin xyz="0.0 0.0 0.0" rpy=" 0.0 0.0 0.0" /> 
+       <geometry>
+         <cylinder length="0.018" radius="0.045"/>
+       </geometry>
+       <material name="Black">
+              <color rgba="${25/255} ${25/255} ${25/255} 1.0"/>
+       </material>
+     </visual>
+   </link>
+
+</robot>
+
