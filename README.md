@@ -123,6 +123,10 @@ $ source /opt/ros/foxy/setup.bash
 $ ros2 run rviz2 rviz2 -d ~/ros2_ws/install/dreamvu_pal_camera_description/share/dreamvu_pal_camera_description/rviz2/pal_usb_with_sensor_subscription.rviz
 ```
 
+<img src="https://github.com/physar/ros2_dreamvu_pal_description/blob/main/images/description_with_point_cloud.png"
+     alt="DreamVu pal description in Rviz2"
+     style="display:block; margin-right: 10px; ext-align:center; " width="800"/>
+     
 ## Troubleshooting
 
 * If your PAL camera is description is not visible in rviz2, open the RobotModel and look which property is marked red to indicate an error.
