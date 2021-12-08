@@ -114,6 +114,14 @@ $ source /opt/ros/foxy/setup.bash
 $ source $~/ros2_ws/install/local_setup.bash
 $ ros2 launch dreamvu_pal_camera_description display_pal_camera.launch.py
 ```
+### camera description and sensor views combined
+
+This package also contains a rviz configuration with added the sensor view, when a <a href=https://github.com/physar/ros2_pal_camera_node>ros2_pal_camera_node</a> is running in the background (and a PAL-sensor connected to your system). There is also a a launch script with calls rviz2 with those views, but that launch script is not successfull tested yet.
+
+```bash
+$ source /opt/ros/foxy/setup.bash
+$ ros2 run rviz2 rviz2 -d ~/ros2_ws/install/dreamvu_pal_camera_description/share/dreamvu_pal_camera_description/rviz2/pal_usb_with_sensor_subscription.rviz
+```
 
 ## Troubleshooting
 
@@ -131,4 +139,6 @@ $ source $~/ros2_ws/install/local_setup.bash
 $ ros2 launch dreamvu_pal_camera_description transfer_base_link.launch.py
 ```
 
-* rviz2 is dropping messages. This means that sensor data (images or point cloud) are published with in the header of the message a coordinate system which is not initiated (yet). Probably the chain is broken for the coordinate transformation from the map to the base_link. The camera images are published from the coordinate system 'pal_camera_center'. See for the solution the state_transform_publisher above.             
+* rviz2 is dropping messages. This means that sensor data (images or point cloud) are published with in the header of the message a coordinate system which is not initiated (yet). Probably the chain is broken for the coordinate transformation from the map to the base_link. The camera images are published from the coordinate system 'pal_camera_center'. See for the solution the state_transform_publisher above.  
+
+* rviz2 crashes on no material for PointCloud. You started rviz2 from the ros2_ws environment, where some plugins are missing. In a vanilla foxy environment (a fresh terminal with only the command 'source /opt/ros/foxy/setup.bash') you should be able to view the PointCloud.        
