@@ -22,7 +22,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <robot name="pal_usb" xmlns:xacro="http://ros.org/wiki/xacro">
     <!-- Arguments -->
 
-    <xacro:arg name="camera_name"   default="/dreamvu/pal" />
+    <xacro:arg name="camera_name"   default="/dreamvu/pal/" />
     <xacro:arg name="camera_model"  default="pal-usb" />
     <xacro:arg name="base_frame"    default="base_link" />
     <xacro:arg name="cam_pos_x"     default="0.0" />
@@ -56,21 +56,21 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    <!-- default option is to rename base_frame to base_link -->
    <link name="$(arg base_frame)" />
 
-   <joint name="$(arg camera_name)_camera_center_joint" type="fixed">
+   <joint name="$(arg camera_name)camera_center_joint" type="fixed">
         <parent link="$(arg base_frame)"/>
-        <child link="$(arg camera_name)_camera_center"/>
+        <child link="$(arg camera_name)camera_center"/>
         <origin xyz="$(arg cam_pos_x) $(arg cam_pos_y) $(arg cam_pos_z)" rpy="$(arg cam_roll) $(arg cam_pitch) $(arg cam_yaw)" />
     </joint>
 
-   <link name="$(arg camera_name)_camera_center" />
+   <link name="$(arg camera_name)camera_center" />
 
-   <joint name="$(arg camera_name)_center_to_mirror" type="fixed">
-	<parent link="$(arg camera_name)_camera_center"/>
-	<child link="$(arg camera_name)_camera_mirror"/>
+   <joint name="$(arg camera_name)center_to_mirror" type="fixed">
+	<parent link="$(arg camera_name)camera_center"/>
+	<child link="$(arg camera_name)camera_mirror"/>
 	<origin xyz="0.0 0.0 ${(camera_center_height-camera_height)/2.5}" rpy=" 0.0 0.0 0.0" /> 
    </joint>
 
-   <link name="$(arg camera_name)_camera_mirror">
+   <link name="$(arg camera_name)camera_mirror">
      <origin xyz="0.0 0.0 0.0" rpy=" 0.0 0.0 0.0" /> 
      <visual>
        <geometry>
@@ -82,13 +82,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      </visual>
    </link>
 
-   <joint name="$(arg camera_name)_center_to_top" type="fixed">
-	<parent link="$(arg camera_name)_camera_center"/>
-	<child link="$(arg camera_name)_mounting_top"/>
+   <joint name="$(arg camera_name)center_to_top" type="fixed">
+	<parent link="$(arg camera_name)camera_center"/>
+	<child link="$(arg camera_name)mounting_top"/>
 	<origin xyz="0.0 0.0 ${camera_height-camera_center_height-(camera_top_height)/2}" rpy=" 0.0 0.0 ${M_PI}" /> 
    </joint>
 
-   <link name="$(arg camera_name)_mounting_top">
+   <link name="$(arg camera_name)mounting_top">
      <visual>
        <origin xyz="0.0 0.0 0.0" rpy=" 0.0 0.0 0.0" /> 
        <geometry>
@@ -100,13 +100,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      </visual>
    </link>
 
-   <joint name="$(arg camera_name)_center_to_bottom" type="fixed">
-	<parent link="$(arg camera_name)_camera_center"/>
-	<child link="$(arg camera_name)_mounting_bottom"/>
+   <joint name="$(arg camera_name)center_to_bottom" type="fixed">
+	<parent link="$(arg camera_name)camera_center"/>
+	<child link="$(arg camera_name)mounting_bottom"/>
         <origin xyz="0.0 0.0 ${(camera_bottom_height)/2-camera_center_height}" rpy=" 0.0 0.0 0.0" /> 
    </joint>
 
-   <link name="$(arg camera_name)_mounting_bottom">
+   <link name="$(arg camera_name)mounting_bottom">
      <visual>
        <origin xyz="0.0 0.0 0.0" rpy=" 0.0 0.0 0.0" /> 
        <geometry>
@@ -118,13 +118,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      </visual>
    </link>
 
-   <joint name="$(arg camera_name)_center_to_protection" type="fixed">
-	<parent link="$(arg camera_name)_camera_center"/>
-	<child link="$(arg camera_name)_mirror_protection"/>
+   <joint name="$(arg camera_name)center_to_protection" type="fixed">
+	<parent link="$(arg camera_name)camera_center"/>
+	<child link="$(arg camera_name)mirror_protection"/>
 	<origin xyz="0.0 0.0 ${camera_bottom_height-camera_center_height}" rpy=" 0.0 0.0 0.0" /> 
    </joint>
 
-   <link name="$(arg camera_name)_mirror_protection">
+   <link name="$(arg camera_name)mirror_protection">
      <visual>
        <origin xyz="0.0 0.0 0.0" rpy=" 0.0 0.0 0.0" /> 
        <geometry>

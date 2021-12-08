@@ -35,7 +35,7 @@ def generate_launch_description():
 # Path to model description file
 
     default_camera_model = 'pal_usb'
-    default_camera_name  = '/dreamvu/pal'
+    default_camera_name  = '/dreamvu/pal/'
 
     default_xacro_path = os.path.join(
         package_dir,
