@@ -105,6 +105,24 @@ ros2 run rviz2 rviz2
 
 Add in this view a TF (and activate the frame pal_camera_center) and a RobotModel (for the topic ```/dreamvu/pal/robot_description```).
 
+### Parameters for the launch of the  the PAL camera description
+
+The launch script can be customized by adding parameters to the command, like 'cam_pos_z:=0.06' in the example above. This is the whole list of paramaters:
+
+* camera_model (default value := 'pal_usb')
+* camera_name  (default value := '/dreamvu/pal/')
+* base_frame   (default value := 'base_link')
+* cam_pos_x    (default value := '0.0')
+* cam_pos_y    (default value := '0.0')
+* cam_pos_z    (default value := '0.06')
+* cam_roll     (default value := '0.0')
+* cam_pitch    (default value := '0.0')
+* cam_yaw      (default value := '0.0')
+* publish_urdf (default value := 'true')
+* xacro_path   (default value := 'pal_usb.urdf.xacro')
+
+The cam_pos is defined as the vector from the base_frame to the camera_center, which explains the 6cm height of the pal_usb.
+
 ### camera description and rviz2 combined
 
 This package also contains a launch script with launches both the description and rviz2, with the views of rviz2 are already provided.
