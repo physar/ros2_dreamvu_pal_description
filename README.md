@@ -121,7 +121,7 @@ The launch script can be customized by adding parameters to the command, like 'c
 * publish_urdf (default value := 'true')
 * xacro_path   (default value := 'pal_usb.urdf.xacro')
 
-The cam_pos is defined as the vector from the base_frame to the camera_center, which explains the 6cm height of the pal_usb.
+The cam_pos is defined as the vector from the base_frame to the camera_center, which explains the 6cm height for the pal_usb.
 
 ### camera description and rviz2 combined
 
